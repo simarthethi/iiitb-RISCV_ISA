@@ -312,6 +312,53 @@ Here in each Instructions set we can see register are of 5 bits so total number 
 RISC-V
 ![Screenshot from 2023-08-21 11-37-03](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f17b3c11-77c8-491c-a875-14bec724912a)
 
+![Screenshot from 2023-08-21 11-39-30](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/57c3343c-4cd5-4253-bad6-c4cc6053fa0f)
+</details>
+<details>
+<summary> Illustration of ABI </summary>
+For verification of the RISC-V CPU the C code will be converted into HEX file and it will be given to the RISC-V CPU and the output will be displayed and verified. The block diagram is shown below : 
+
+Consider the .c file for sum from 1 to 9
+![Screenshot from 2023-08-21 12-28-24](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6fc3a2e6-b3b8-40bc-a787-ed2c127ae1a4)
+
+Consider the assembly code (ASM) given below :
+![Screenshot from 2023-08-21 12-28-35](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/c8894186-6b6e-44de-a286-83dbc1071d42)
+
+The flow chart of the function performed by ASM code is shown below :
+![Screenshot from 2023-08-21 12-31-23](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/a59b2a81-9f7e-47ab-94a2-eb6ec9b624ec)
+
+To illustrate the ABI the C code shown above will send the values to the ASM code through the function load and the ASM code will perform the function and return the value to C code and the value is displayed by the C code.
+
+- Perform the following steps
+```bash
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o custom_1_to_9.o custom_1_to_9.c load.S
+riscv64-unknown-elf-objdump -d custom_1_to_9.o | less
+spike pk custom_1_to_9.o
+```
+![Screenshot from 2023-08-21 11-52-15](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/2d4cc791-c8c7-482f-a48e-ef99d6bb0669)
+
+![Screenshot from 2023-08-21 11-50-55](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/0a9fbf4c-2aa5-48be-b543-a3226bbb9406)
+</details>
+
+<details>
+<summary> RISC-V Basic Verification flow using iverilog demo </summary>
+  
+  ![Screenshot from 2023-08-21 12-20-50](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4a1926ab-0d60-45ad-a38b-965c08c9bc29)
+  For demo go to the lab directory using the command given below :
+  ```bash
+cd ~/riscv_workshop_collaterals/labs/
+chmod 777 rv32im.sh
+./rv32im.sh  # Contains necessary commands to convert C to hex
+```
+**Output, Script(rv32im.sh) and firmare.hex**
+![Screenshot from 2023-08-21 12-23-14](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/449d6aff-7cea-4ad2-9a07-988ec818bad9)
+
+![Screenshot from 2023-08-21 12-24-27](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f74e2dda-8a01-4d2d-b8a4-3f06361f2c66)
+
+![Screenshot from 2023-08-21 12-37-51](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6dd9e186-2adf-46e3-b0d4-23cc88881d09)
+
+</details>
+
 
 
 
