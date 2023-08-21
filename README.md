@@ -357,6 +357,9 @@ chmod 777 rv32im.sh
 
 ![Screenshot from 2023-08-21 12-37-51](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6dd9e186-2adf-46e3-b0d4-23cc88881d09)
 
+![Screenshot from 2023-08-21 12-41-29](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6e8a2180-4186-4b98-976f-d155a88efd50)
+
+
 </details>
 
 
