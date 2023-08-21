@@ -223,6 +223,48 @@ computer architecture and implementation. Total Number of
 pattern by RV64 will be 2^64 RISC- doubleword can represent
 '0' to '(2^64 - 1)' unsigned numbers or positive numbers
 </details>
+<details>
+<summary> Lab for signed and un signed integers </summary>
+  
+Here we are going to execute the following code for unsigned numbers.
+The output is given for unsigned numbers and we are just viewing if it is within the range or 
+it goes out in which case displays either the minimum or maximum values.
+
+  ```bash
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    unsigned long long int max = (unsigned long long int)(pow(2,64)-1);       //statement 1  //will display the max number
+    //unsigned long long int max = (unsigned long long int)(pow(2,127)-1);    //statement 2  //(out of range) will display the max number(within range)
+    //unsigned long long int max = (unsigned long long int)(pow(2,10)-1);     //statement 3  //will display number (since it is within range)
+    //unsigned long long int max = (unsigned long long int)(pow(2,64) * -1);  //statement 4  //will display 0 since it is a -ve number
+    printf("highest number represented by unsigned long long int is %llu\n",max);
+    return 0;
+}
+```
+The below screenshot shows the output of the same.
+![risc day_1 unsignednumber](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/1ad854c1-0f7a-4e5e-8761-250520cf8307)
+
+- Next we execute the code for signed intgger
+
+```bash
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    long long int max = (long long int)(pow(2,63)-1);        //will display the max number
+    long long int min = (long long int)(pow(2,63) * -1);     //will display the min number
+    printf("highest number represented by long long int is %lld\n",max);
+    printf("lowest number represented by long long int is %lld\n",min);
+    return 0;
+}
+```
+The below screenshot shows the output of the same.
+![riscv day_1 signednumber](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/e5759cdc-2334-4fc4-b88a-1daf95c8e119)
+
+
 
 ## Day 2
 
