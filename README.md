@@ -263,6 +263,7 @@ int main()
 ```
 The below screenshot shows the output of the same.
 ![riscv day_1 signednumber](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/e5759cdc-2334-4fc4-b88a-1daf95c8e119)
+</details>
 
 
 
