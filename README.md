@@ -273,5 +273,46 @@ The below screenshot shows the output of the same.
 <summary> Introduction to ABI and verification Flows </summary>
 
 
+- The application program can directly access the registers of the RISC V architecture using something known as system calls. The ABI (also known as system call interface enables the application to access the hardware resources via registers.
+
+- In RISC V architecture, the width of the register is defined as XLEN. For RV64 and RV32, the widths are 64 bits and 32 bits, respectively.
+
+- RISC V belongs to the little endian memory addressing system, which means that the least significant byte of a word is stored in the smallest memory address.
+
+An Application Binary Interface is a set of rules enforced by the operating system on a specific architecture. So, Linker converts relocatable machine code to absolute machine code via ABI interface specific to the architecture of machine. Just like how application program interface (API) is used by application programs to access the standard libraries, an application binary interface or system call interface is utilised to access hardware resources. The ISA is inherently divided into two parts: User & System ISA and User ISA the latter is available to the user directly by system calls.
+
+Now, how does the ABI access the hardware resources?
+
+- It uses different registers(32 in number) which are each of width XLEN = 32 bit for RV32 (~XLEN = 64 for RV64) . On a higher level of abstraction these registers are accessed by their respective ABI names.
+
+    For base integer instructions there are broadly 3 types of of such registers:
+        I-type : For instructions having immediate values as operands.
+        R-type : For instructions having only registers as operands.
+        S-type : For instructions used for storing operations.
+
+So, it is system call interface used by the application program to access the registers specific to architecture. Overhere the architecture is RISC-V, so to access 32 registers of RISC-V below is the table which shows the calling convention (ABI name) given to registers for the application programmer to use.
+
+## Load,Add And Store Instructions
+```bash
+ld x8,16(x23)
+```
+here ld is for load doubleword,x8 shows destination register (rd),16 is offset,x23 is source register . This is I type Instructions :
+![Screenshot from 2023-08-21 11-20-40](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/831b8e92-5443-46cc-adef-331f1427c12b)
+```
+add x8,x29,x8
+```
+here add is function,x8 is destination register (rd),x29 & x8 is source register. This is R type Instructions :
+![Screenshot from 2023-08-21 11-24-27](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/dcfaefc5-a12b-46ef-8c08-748c8db539f1)
+```bash
+sd x8,8(x23)
+```
+here store is store doubleword,x8 is data registers,8 tell offset(immediate) ,x23 is source register. This is S type Instructions :
+![Screenshot from 2023-08-21 11-34-28](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/bd67289f-f016-434f-bb8f-d821e0ff2cc2)
+Here in each Instructions set we can see register are of 5 bits so total number of register = 2^5 = 32 registers
+RISC-V
+![Screenshot from 2023-08-21 11-37-03](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f17b3c11-77c8-491c-a875-14bec724912a)
+
+
+
 
 
