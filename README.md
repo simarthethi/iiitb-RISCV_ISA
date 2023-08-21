@@ -145,6 +145,9 @@ In the above screenshot, we can see the register pertaining to a particular inst
 <details>
 <summary> Integer number representation </summary>
 The RISC-V architecture defines several different data types and number systems to represent and manipulate data. Here, I'll explain the basic number systems used in RISC-V:
+  
+![Screenshot from 2023-08-21 09-55-55](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/fc09b089-ab31-4f9f-8199-4a1d2c3341d6)
+
 
 - Binary Number System: RISC-V, like most digital systems,
 primarily operates on binary data. In the binary number
