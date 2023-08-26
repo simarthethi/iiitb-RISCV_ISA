@@ -456,12 +456,6 @@ We implement a sequential calculator that updates on each clock cycle.
 
 <details>
 <summary>Pipelining</summary>
-Validity is another feature in TL verilog which is asserted if a particular transactions in a pipeline is valid or true. A new scope, called “when” scope is introduced for this and it is denoted as ?$valid. This new scope has many advantages - easier design, cleaner debug, better error checking and automated clock gating. Validity provides :
-
-- Easier debug
-- Cleaner design
-- Better error checking
-- Automated Clock gating
 
 
 
