@@ -457,6 +457,40 @@ We implement a sequential calculator that updates on each clock cycle.
 <details>
 <summary>Pipelining</summary>
 
+Pipelining is a technique used in digital design and computer architecture to improve the efficiency and performance of processing by 
+breaking down a task into 
+smaller stages that can be executed concurrently. Here are some of the benefits of pipelining -
+- Increased throughput
+- reduced latency
+- Better resource utilization
+- improved parallelism
+- Smoother Performance
+- Scalability
+- Faster clock speeds
+
+*Pipelined Pythegorean Imoplementation*
+![Screenshot from 2023-08-22 14-15-12](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/268f9da4-5140-46bd-8670-7775af9688db)
+
+*Fibonacci sequence in pipeline*
+![Screenshot from 2023-08-26 21-28-17](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/7d2213de-a780-4a29-9502-13f974dfcc62)
+
+![Screenshot from 2023-08-26 21-29-53](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/aab3dbff-c89d-494f-a5a1-a3151660ee8e)
+
+*Creating the given piplined circuit in makerchipIDE*
+
+- Under this, we are given a pipelined structure and asked to recreate it on Makerchip using TLverilog
+![Screenshot from 2023-08-26 21-32-22](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6443b423-1f2b-4425-8035-14d9985cb935)
+
+*Counter and Calculator in pipeline*
+![Screenshot from 2023-08-26 21-55-39](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/e15763a4-375e-401e-a9cf-671737289f03)
+
+
+- In here we will apply pipeline to our counter and sequential calculator
+
+![Screenshot from 2023-08-26 21-47-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/8cd1e3e2-a945-4887-947c-707cfe73ba69)
+
+- Implementation on Makerchip IDE is shown as below.
+```bash
 
 
 
