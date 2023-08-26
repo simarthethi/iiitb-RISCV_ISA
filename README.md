@@ -751,8 +751,114 @@ We will follow a test driven development, ie. develop first and then test functi
 <details>
 <summary>Fetch and decode</summary>
 
+Here we gonna design RiscV Cpu Core for which block diagram is given below :
+![Screenshot from 2023-08-27 03-10-48](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/3a142599-75f1-494c-9728-a43dbaac02fb)
+
+**Program Counter Logic**
+
+The Program Counter, often referred to as the "PC," is a fundamental component of a processor 
+that keeps track of the address of the next instruction to be executed. In the RISC-V 
+architecture, the PC is typically called "pc" or "pc_reg." Overall, the PC logic is crucial 
+for the control flow of a program. It determines which instruction will be executed next and 
+how the program progresses. RISC-V, as a RISC (Reduced Instruction Set Computer) architecture, 
+emphasizes simplicity and regularity in its design, which extends to its PC handling 
+mechanisms.
+
+![Screenshot from 2023-08-27 03-15-02](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/0e38ef87-0613-46c4-b023-11dfe176787a)
+
+```bash
+|cpu
+      @0
+         $reset = *reset;
+         
+         $pc[31:0] = >>1$reset ? 32'b0 : >>1$pc + 32'd4;
+```
+- program counter implementation on makerchipIDE
+![Screenshot from 2023-08-27 03-30-13](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/871b396b-03a1-4b3f-98e4-a04bf91ba7e0)
+
+**Fetch implementation Logic**
+During the fetch stage, processors fetches the instruction from the memory to the address 
+pointed by the program counter. The program counters holds the address of the next stage, in 
+our case it is after 4 cycle and the instruction memory holds the set of instruction to be 
+executed. The snapshot of the fetch stage is shown below.
+         
+- logic diagram for Fetch
+![Screenshot from 2023-08-27 03-33-51](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6fd351cd-a681-48c9-8c26-b720ad06502e)
+
+```bash
+|cpu
+      @0
+         $reset = *reset;
+         $pc[31:0] = >>1$reset ? 32'b0 : >>1$pc + 32'd4;
+
+// Assert these to end simulation (before Makerchip cycle limit).
+*passed = *cyc_cnt > 40;
+*failed = 1'b0;
+
+|cpu
+      m4+imem(@1)    // Args: (read stage)
+
+m4+cpu_viz(@4)
+```
+- Implementation of Fetch Logic on Makerchip along with Diagram and Visualisation.
+![Screenshot from 2023-08-27 03-35-59](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/28ac652b-4c95-4139-990e-13cd7958ca39)
+
+The current implementations have errors such as the variables are not being used. Fetch Logic 
+to be implemented
+
+![Screenshot from 2023-08-27 03-37-54](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/490e6212-26c6-4205-ab1b-08a3095da51e)
+
+- code for implementation of Fetch
+```bash
+@0
+         $reset = *reset;
+         $pc[31:0] = >>1$reset ? 32'b0 : >>1$pc + 32'd4;
+      @1
+         $imem_rd_addr[M4_IMEM_INDEX_CNT-1:0] = $pc[M4_IMEM_INDEX_CNT+1:2];
+         $imem_rd_en = !$reset;
+         $instr[31:0] = $imem_rd_data[31:0];
+      
+      ?$imem_rd_en
+         @1
+            $imem_rd_data[31:0] = /imem[$imem_rd_addr]$instr;          
+```
+
+- Final implementation of Fetch Logic
+
+![Screenshot from 2023-08-27 03-48-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/c0e496de-bae6-4f3d-bb90-16307576cda3)
+
+![Screenshot from 2023-08-27 03-56-06](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/81578a5d-ba09-46e8-94a8-33298b261f9e)
+
+**Decode Logic**
+
+Under this section, we look into how to decode the instruction code we fetched from memory.
+
+- Logic Diagram for Decode stage.
+
+![Screenshot from 2023-08-27 03-54-11](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/253b7b53-f04f-4bb2-8d34-c6ebd181689e)
+
+Before moving on to Decode logic implementation, it is important to understand how the 
+instruction set and opcode are defined in RISC-V. We have dicussed before the different types 
+of the instruction types. The various types of instrutcion types are summarised in the table 
+along with the binary code. There are 6 instructions type in RISC-V :
+
+- Register (R) type
+- Immediate (I) type
+- Store (S) type
+- Branch (B) type
+- Upper immediate (U) type
+- Jump (J) type
+
+![Screenshot from 2023-08-27 04-01-21](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/bfb64c18-904d-47b0-afb8-a1c8dc13348f)
 
 
 
 
+-code for decode logic
+```bash
+
+```
+
+
+     
 
