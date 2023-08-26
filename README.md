@@ -562,6 +562,92 @@ and covered with the Validity concept.
 
 ![Screenshot from 2023-08-23 02-08-56](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/d7c2c04a-f60e-4373-b779-5207dd74ec4c)
 
+*2-Cycle Calculator with Validity*
+
+Under this lab work we design a 2-cycle calculator along with the validity functionality.
+
+- Pipelined Logic Design to be implemented
+
+![Screenshot from 2023-08-27 01-56-59](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/8737bd4d-c9db-4aef-a675-d3bf370a435a)
+
+Code on TLverilog
+```bash
+|calc
+      
+      @0
+         $reset = *reset;
+      @1
+         $val1[31:0] = >>2$out[31:0];
+         $val2[31:0] = $rand2[3:0];
+         
+         $valid = $reset ? 1'b0 : >>1$valid + 1'b1;
+         $valid_or_reset = $valid || $reset;
+
+      ?$valid_or_reset   
+         @1
+
+
+            $sum[31:0] = $val1+$val2;
+            $dif[31:0] = $val1-$val2;
+            $mul[31:0] = $val1*$val2;
+            $div[31:0] = $val1/$val2;
+            
+
+         @2
+            $out[31:0] = ($reset)? 1 :($op[1] ? ($op[0] ? $div : $mul):($op[0] ? $dif : $sum));
+```
+-Implementation on Makerchip IDE.
+![Screenshot from 2023-08-23 02-40-04](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/323c5c26-d261-4386-ab8b-7aadfb1fc431)
+
+*Calculator with Single-value Memory*
+
+Under this lab work, we design a calculator with a memory component.
+
+- Pipelined design to be implemented.
+
+![Screenshot from 2023-08-27 02-03-38](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/a5ad008f-5b8b-4840-9257-20d589fdeb54)
+
+- Code on TLverilog
+```bash
+|calc
+      @0
+         $reset = *reset;
+         
+      @1
+         $val1 [31:0] = >>2$out[31:0];
+         $val2 [31:0] = $rand1[3:0];
+         
+         $valid = $reset ? 1'b0 : >>1$valid + 1'b1 ;
+         $valid_or_reset = $valid || $reset;
+         
+      ?$vaild_or_reset
+         @1   
+            $sum[31:0] = $val1 + $val2;
+            $dif[31:0] = $val1 - $val2;
+            $mul[31:0] = $val1 * $val2;
+            $div[31:0] = $val1 / $val2;
+            
+         @2   
+            $mem[31:0] = $reset ? 32'b0 :
+                         ($op[2:0] == 3'b101) ? $val1 : >>2$mem ;
+            
+            $out [31:0] = $reset ? '1 :
+                          ($op[2:0] == 3'b000) ? $sum :
+                          ($op[2:0] == 3'b001) ? $dif :
+                          ($op[2:0] == 3'b010) ? $mul :
+                          ($op[2:0] == 3'b011) ? $div :
+                          ($op[2:0] == 3'b100) ? >>2$mem : >>2$out ;
+```
+- Implementation on Makerchip IDE.
+![Screenshot from 2023-08-27 02-05-46](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/7bea8535-b8e0-4f76-a46b-d1b88ff8d345)
+</details>
+
+<details>
+<summary>Wrap up</summary>
+</details>
+
+## Day 4
+            
 
 
 
