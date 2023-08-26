@@ -414,16 +414,54 @@ of Verilog which has various advantages like simpler syntax, shorter codes and e
 </details>
 <details>
 <summary>Combinational Logic</summary>
-
+  
+Under this section, we will go over a few lab examples using Makerchip to have a firm grasp.
+  
 *Lab On Understanding Usage Of Vector*
 ![Screenshot from 2023-08-21 14-54-24](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/100c5fda-0752-46b7-ad5f-d07be9eb7315)
 
 *Lab on making MUX using makerchip IDE*
+![Screenshot from 2023-08-26 18-35-17](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4b39ecd7-e2fd-412d-a4bb-529e92531740)
 
+**Implementation of the calculator using MakerchipIDE**
+Now a lab on combinational calculator is implemented that can perform +, -, *, / on two input values. The snapshot of the code, waveform and diagram is as shown below.
+![Screenshot from 2023-08-21 15-43-43](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/d98025c3-e023-4654-b853-92a1434aaa93)
 
+</details>
+<details>
+<summary>Sequential logic</summary>  
+Under this section, we will look into the implementation of sequential logic circuits on Makerchip IDE. Sequential logic integrates a clock 
+that defines the flow and transition of data. The cicuit also integrates a reset which upon activation will reset the output to a pre-
+defined value. The most common flipflop used is D flip flop.
 
+![Screenshot from 2023-08-26 18-41-40](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/14d3b3f6-f9f4-42b3-b0a8-376bd3360841)
+- The circuits can be refered as a state machine as well, the flops are followed by the combinational logic.
 
+*Fibonacci sequence implementaion*
+![Screenshot from 2023-08-26 18-43-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/be0e38f8-8b30-4fbe-913f-67df284f0081)
 
+*Implementing free running counter*
+![Screenshot from 2023-08-21 15-52-17](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f6b85424-e0a6-4433-88fe-12accc5510d1)
+
+*Sequential calculator using makerchipIDE*
+Here we will use what e learnt during the counter and fibonacci series an apply it on the calculator that we implemented before.
+We implement a sequential calculator that updates on each clock cycle.
+- The circuit diagram
+![Screenshot from 2023-08-26 18-48-07](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/8bb98cfe-1996-4673-9877-b2cbdd1e5182)
+
+*makerchipIDE squential calculator*
+![Screenshot from 2023-08-22 01-37-17](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4cacb86a-a1a3-4025-ade3-f3da38e4a2f1)
+
+</details>
+
+<details>
+<summary>Pipelining</summary>
+Validity is another feature in TL verilog which is asserted if a particular transactions in a pipeline is valid or true. A new scope, called “when” scope is introduced for this and it is denoted as ?$valid. This new scope has many advantages - easier design, cleaner debug, better error checking and automated clock gating. Validity provides :
+
+- Easier debug
+- Cleaner design
+- Better error checking
+- Automated Clock gating
 
 
 
