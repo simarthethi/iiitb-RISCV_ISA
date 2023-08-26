@@ -362,6 +362,13 @@ chmod 777 rv32im.sh
 
 </details>
 
+## Day 3
+
+<details>
+
+<summary> Digital Logic with TL verilog and Makerchip </summary>
+
+
 
 
 
