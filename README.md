@@ -491,6 +491,80 @@ smaller stages that can be executed concurrently. Here are some of the benefits 
 
 - Implementation on Makerchip IDE is shown as below.
 ```bash
+$reset = *reset;
+   
+   |calc
+      @1
+         $val1[31:0] = >>2$out[31:0];
+         $val2[31:0] = $rand2[3:0];
+
+         $sum[31:0] = $val1+$val2;
+         $dif[31:0] = $val1-$val2;
+         $mul[31:0] = $val1*$val2;
+         $div[31:0] = $val1/$val2;
+         $valid[1:0] = $reset ? 0 : >>1$valid + 1'b1;
+         
+      @2
+         $out[31:0] = !($reset &&  !($valid))? 1 :($op[1] ? ($op[0] ? $div : $mul):($op[0] ? $dif : $sum));
+```
+- Implementation using Makerchip IDE
+![Screenshot from 2023-08-22 23-09-28](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f411f259-7a93-418b-a225-de9b968ad012)
+
+</details>
+
+<details>
+<summary>Validity</summary>
+
+Validity is another feature in TL verilog which is asserted if a particular transactions in a pipeline is valid or true. A new scope, called “when” scope is introduced for this and it is denoted as ?$valid. This new scope has many advantages - easier design, cleaner debug, better error checking and automated clock gating. Validity provides :
+
+- Easier debug
+- Cleaner design
+- Better error checking
+- Automated Clock gating
+
+**Clock Gating**
+
+- Clock signals are distributed to EVERY flip-flop.
+- Clocks toggle twice per cycle. This consumes power.
+- Clock gating avoids toggling clock signals.
+- TL-Verilog can produce fine-grained gating (or enables).
+
+Thus, in TLverilog, we don't have to look into clock gating individually. It gets considered 
+and covered with the Validity concept.
+
+*Distance Accumulator using Makerchip IDE*
+- The pipelined block diagram for the accumulator
+
+![Screenshot from 2023-08-26 22-06-01](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/24e6996b-9d1a-4102-bae4-b3c54021b27c)
+
+- Code for the design on TLverilog
+```bash
+|calc
+      
+      @1
+         $reset = *reset;    
+      
+      ?$valid
+         @1
+            $aa_sq[31:0] = $aa[3:0] ** 2;
+            $bb_sq[31:0] = $bb[3:0] ** 2;
+          @2
+            $cc_sq[31:0] = $aa_sq + $bb_sq;
+          @3
+            $cc[31:0] = sqrt($cc_sq);
+            
+      @4
+         $tot_dis[63:0] = 
+                   $reset ? '0 :
+                   $valid ? >>1$tot_dis + $cc :
+                            >>1$tot_dis;
+```
+
+![Screenshot from 2023-08-23 02-08-56](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/d7c2c04a-f60e-4373-b779-5207dd74ec4c)
+
+
+
+
 
 
 
