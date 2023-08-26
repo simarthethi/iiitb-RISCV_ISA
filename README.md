@@ -362,11 +362,66 @@ chmod 777 rv32im.sh
 
 </details>
 
-## Day 3
+## Day 3 - Digital Logic with TL verilog and Makerchip
 
 <details>
 
-<summary> Digital Logic with TL verilog and Makerchip </summary>
+<summary> Introduction </summary>
+
+In here we will learn about **TL verilog** and **makerchip** and how to implement and visualize the logic gates and other circuits
+The topics covered are as follows:
+
+- Logic gates
+- MakerChip platform(IDE)
+- Combinational Logic
+- Sequential Logic
+- Piplining logic
+- Validity
+
+**Logic Gates** - Logic gates are fundamental building blocks of digital circuits. They are electronic devices that perform basic logical operations on one or more 
+binary inputs (usually 0 or 1) to produce a single binary output. These gates are the foundation of all digital systems, including computers, microcontrollers, and 
+other digital devices. Logic gates are typically implemented using electronic components such as transistors.
+
+The gates commonly used are:
+
+- NOT
+- AND
+- OR
+- NAND
+- NOR
+- XOR
+- XNOR
+
+![risc day 3 ](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/86b2e0e3-8356-4fd2-a8bf-0d94282c26e1)
+Although we can implement all the gates using *NAND* or *NOR* gates (prefers NAND gate with its low-cost, high-density, high-speed 
+program/erase applications, for file storage in consumer applications.)
+
+The following provides booliean logic for the above gates
+![Screenshot from 2023-08-26 18-22-56](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/57e4e26e-900a-4a1a-af16-f516e469539f)
+
+**Introduction to makerchip**
+Makerchip is a free online environment for developing high-quality integrated circuits. You can code, compile, simulate, and debug Verilog 
+designs, all from your browser. Your code, block diagrams, and waveforms are tightly integrated.TL-Verilog was used as the HDL of choice 
+for this project. Projects on Makerchip can be completely designed using TL-Verilog. Transaction Level - Verilog standard is an extension 
+of Verilog which has various advantages like simpler syntax, shorter codes and easy pipelining.
+
+*Loading the Pythagorean example on the makerchip*
+![Screenshot from 2023-08-21 14-31-33](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/f5a732b9-3721-46cb-bd18-e256a226ae4b)
+
+*Loading invertor logic on makerchip*
+![Screenshot from 2023-08-21 14-48-26](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/097ecb0e-b85c-49f4-a89e-fda7fb6a8282)
+
+</details>
+<details>
+<summary>Combinational Logic</summary>
+
+*Lab On Understanding Usage Of Vector*
+![Screenshot from 2023-08-21 14-54-24](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/100c5fda-0752-46b7-ad5f-d07be9eb7315)
+
+*Lab on making MUX using makerchip IDE*
+
+
+
 
 
 
