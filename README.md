@@ -5,7 +5,13 @@ This github repositary contains all the progress made during RISC-V based MYTH
 
 [Day 2](#day-2)
 
-## Day 1
+[Day 3](#day-3)
+
+[Day 4](#day-4)
+
+[Day 5](#day-5)
+
+## Day 1 - Introduction to RSIC-V ISA and GNU compiler toolchain
 
 <details>
 <summary> Installation of tools </summary>
@@ -267,7 +273,7 @@ The below screenshot shows the output of the same.
 
 
 
-## Day 2
+## Day 2 - Introduction to Application Binary Interface And Basic Error Flow
 
 <details>
 <summary> Introduction to ABI and verification Flows </summary>
