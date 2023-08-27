@@ -1,4 +1,4 @@
-# iiitb-RISCV_ISA
+![image](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/c53d302c-3473-4e13-8425-689bb897df8b)# iiitb-RISCV_ISA
 This github repositary contains all the progress made during RISC-V based MYTH
 
 [Day 1](#day-1)
@@ -856,8 +856,27 @@ along with the binary code. There are 6 instructions type in RISC-V :
 
 -code for decode logic
 ```bash
-
+@1
+         $is_i_instr = $instr[6:2] ==? 5'b0000x || 
+                       $instr[6:2] ==? 5'b001x0 || 
+                       $instr[6:2] == 5'b11001;
+         $is_r_instr = $instr[6:2] ==? 5'b011x0 || 
+                       $instr[6:2] == 5'b01011 || 
+                       $instr[6:2] == 5'b10100;
+         $is_s_instr = $instr[6:2] ==? 5'b0100x;
+         $is_b_instr = $instr[6:2] ==? 5'b11000;
+         $is_j_instr = $instr[6:2] ==? 5'b11011;
+         $is_u_instr = $instr[6:2] ==? 5'b0x101;
 ```
+- Implementation for fetch logic
+![Screenshot from 2023-08-27 04-16-14](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/92c1a303-4a0d-405a-b409-3a4b2ee994e7)
+
+![Screenshot from 2023-08-27 04-18-11](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/a58e4ca9-e7da-4907-a7b2-cd5a2fc94f7a)
+
+*Lab on instruction immediate code*
+![Screenshot from 2023-08-27 04-20-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6c8d10ae-0370-487a-9906-1c400932d6ab)
+
+
 
 
      
