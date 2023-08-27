@@ -1,4 +1,4 @@
-![image](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/76cc6c7c-ede8-4565-83c0-425b895303f8)# iiitb-RISCV_ISA
+# iiitb-RISCV_ISA
 This github repositary contains all the progress made during RISC-V based MYTH
 
 [Day 1](#day-1)
