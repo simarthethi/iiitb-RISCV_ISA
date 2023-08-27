@@ -1113,6 +1113,7 @@ The following output is obtained on MakerChip.
 ![Screenshot from 2023-08-27 15-59-51](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6cd66100-a2cc-42e7-8e7f-b86f6de9ae3a)
 
 *LAB to distribute logic*
+
 Pipelining is done in this step. Code is distributed and output is obtained.
 ![Screenshot from 2023-08-27 16-01-42](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/3ebabe6d-2cae-4ef5-9168-a815d1ca9f72)
 
