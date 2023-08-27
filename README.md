@@ -952,4 +952,16 @@ along with the binary code. There are 6 instructions type in RISC-V :
          $is_addi = $dec_bits ==? 11'bx_000_0010011;
          $is_add = $dec_bits ==? 11'b0_000_0110011;
 ```
-         
+![Screenshot from 2023-08-27 13-00-19](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/7cbae990-ae41-433c-85a6-b469aba03946)
+
+- Implementaion of individual instruction decode
+![Screenshot from 2023-08-27 13-01-46](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/50f23fbf-f79f-441b-92c0-dc65764ae77e)
+- VIZ
+![Screenshot from 2023-08-27 13-02-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/2a58ceda-1f52-4817-8f3f-ec8533ee41d8)
+
+</details>
+
+<details>
+<summary>RISC-V control logic</summary>
+
+  
