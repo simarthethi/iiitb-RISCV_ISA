@@ -1121,6 +1121,48 @@ Pipelining is done in this step. Code is distributed and output is obtained.
 
 ![Screenshot from 2023-08-27 16-03-34](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/59b51783-7778-4333-8080-42f37fc75197)
 
+</details>
+
+<details>
+<summary>Solutions to pipeline hazzards</summary>
+
+**Lab for register file Bypass to address rd-after-wr hazard**
+
+We are required to implement the logic as per the given figure.
+
+![Screenshot from 2023-08-27 16-56-28](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4371f568-2336-4e19-894c-23748e4fd4a6)
+
+The logic code required is given below.
+```bash
+$src1_value[31:0] = ((>>1$rf_wr_en) && (>>1$rd == $rs1 )) ? (>>1$result): $rf_rd_data1; 
+$src2_value[31:0] = ((>>1$rf_wr_en) && (>>1$rd == $rs2 )) ? (>>1$result) : $rf_rd_data2;
+```
+- there would be no noticible changes
+![Screenshot from 2023-08-27 16-58-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/348e2e5f-97b3-4030-80c6-358e0e9df5c4)
+
+*Lab for branches to correct the branch target path*
+
+The logic snippet required is given below.
+```bash
+ $pc[31:0] = (>>1$reset) ? 32'b0 : (>>3$valid_taken_br) ? (>>3$br_tgt_pc) :  (>>3$int_pc)  ;
+         //$valid = $reset ? 1'b0 : ($start) ? 1'b1 : (>>3$valid) ; no need for this
+```
+
+![Screenshot from 2023-08-27 17-01-34](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/73ebe28c-d743-4840-ba62-465a0fc29809)
+
+
+**Lab for complete RV32I instruction set (except FENCE, ECALL, EBREAK)**
+
+Added some more instructions to the existing ones and removed bogus codes and added some real values.
+
+![Screenshot from 2023-08-27 17-03-00](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/b763829f-78db-4f63-a85e-46441b07d22b)
+
+</details>
+
+<details>
+<summary>Load and store data memory & Wrap up</summary>
+
+
 
 
 
