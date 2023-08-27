@@ -963,5 +963,122 @@ along with the binary code. There are 6 instructions type in RISC-V :
 
 <details>
 <summary>RISC-V control logic</summary>
+	
+Under this section, we will look into the implementation of RISC-V CPU from register file read 
+onwards.	
+**Execute and Register file read/write**
 
-  
+- Pipelined Logic diagram for implementation.
+![Screenshot from 2023-08-27 14-02-47](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/dd050004-605a-4bcf-a471-dafdae24fab3)
+
+- Structure of the register design for implementation. Two read operations and one write operation to be performed.
+![Screenshot from 2023-08-27 14-04-09](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/bffed054-73d1-4f63-bfcb-44770b63ce70)
+
+- Code for implementaion
+```bash
+	 $rf_wr_en = 1'b0;
+         $rf_wr_index[4:0] = 5'b0;
+         $rf_wr_data[31:0] = 32'b0;
+         $rf_rd_en1 = $rs1_valid;
+         $rf_rd_en2 = $rs2_valid;
+         
+         $rf_rd_index1[4:0] = $rs1;
+         $rf_rd_index2[4:0] = $rs2;
+```
+- Now, we have read the register files, we will connect up the values we have read to the signals we will send to the ALU.
+- Code for connection.
+```bash
+	 $src1_value[31:0] = $rf_rd_data1;
+         $src2_value[31:0] = $rf_rd_data2;
+```
+
+*ALU Imlimentaion*
+We move to the next stage of implementation, ie. ALU. The logic diagram.
+
+![Screenshot from 2023-08-27 14-07-54](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/8a8e7fdb-c2ee-47c9-b613-f85b762eace2)
+
+- code to implement the arithmatic and logic functionalities of the ALU.
+```bash
+	$result[31:0] = $is_addi ? $src1_value + $imm :
+			$is_add ? $src1_value + $src2_value :
+			32'bx ;
+```
+
+- Implementation upto ALU on Makerchip IDE
+![Screenshot from 2023-08-27 14-10-04](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/02654228-d6bf-49ff-8750-4ad6ff33810f)
+
+*Register File Write Implementation*
+
+Under this we go over the implementation of Write funcction after the ALU has performed.
+
+- Logic Diagram
+![Screenshot from 2023-08-27 14-11-35](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4200d704-3398-4377-9e78-2b7ca0802338)
+
+- Code for writing register file.
+```bash
+	$rf_wr_en = $rd_valid && $rd != 5'b0;
+	$rf_wr_index[4:0] = $rd;
+	$rf_wr_data[31:0] = $result;
+```
+- Implementaion of the register file logic
+![Screenshot from 2023-08-27 14-22-34](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/d7909254-49e0-4a29-8484-5afb95cc20b8)
+
+**Note** : We will look into arrays under RISC-V.
+
+- Arrays are collection of data of same datatypes.
+- RISC-V processors support arrays through their memory access instructions and addressing modes. In the RISC-V architecture, arrays are commonly managed using a combination of memory locations and registers.
+- Arrays are represented as contiguous blocks of memory in RISC-V.
+- Pointers are used to track the memory address where the array starts.
+- Arrays are accessed using pointers and offsets calculated from the index and element size.
+- Load and store instructions are used to manipulate array elements.
+- Pointer arithmetic involves adding offsets to pointers for accessing different elements.
+- Pointers are initialized with the memory address of the array's first element.
+- Array operations are performed through load-store instructions and pointer manipulation.
+
+![Screenshot from 2023-08-27 14-25-01](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/a8ec4da7-5c92-4cba-81c9-3f36a54fcc9c)
+
+*Branch Instruction Imlementaion*
+We will look into the implementations for the various branch instructions, we have decoded earlier.
+
+- Logic Diagram
+![Screenshot from 2023-08-27 14-34-59](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/30a2f80a-111e-479a-9c84-b9a19c3f2b9e)
+
+- All instr with B initials are branch statements. Logic for the branches are as follow
+![Screenshot from 2023-08-27 14-38-09](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/9812d296-5cc9-411f-85c4-8b83e9ef37ab)
+
+- Code for implementing when to take a branch.
+```bash
+$taken_branch = $is_beq ? ($src1_value == $src2_value):
+		$is_bne ? ($src1_value != $src2_value):
+		$is_blt ? (($src1_value < $src2_value) ^ ($src1_value[31] != $src2_value[31])):
+		$is_bge ? (($src1_value >= $src2_value) ^ ($src1_value[31] != $src2_value[31])):
+		$is_bltu ? ($src1_value < $src2_value):
+		$is_bgeu ? ($src1_value >= $src2_value):
+		1'b0;
+```
+
+- Now, we will look into how to figure out where to branch to.
+- Code to determine the path to Branch to
+```bash
+$br_target_pc[31:0] = $pc + $imm;
+```
+
+- implemenataion of branch instructions
+![Screenshot from 2023-08-27 14-40-48](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/316a3825-837f-47fd-836b-b84a82f7d87c)
+
+*Creating a test bench*
+- code
+```bash
+*passed = |cpu/xreg[10]>>5$value == (1+2+3+4+5+6+7+8+9) ;
+```
+
+![Screenshot from 2023-08-27 14-42-36](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/3ebd4ec2-62f8-496b-9dd1-5a2affb2d370)
+
+</details>
+
+## Day 5 - Complete Pipelined RISC-V CPU Micro-Architecture
+
+<details>
+<summary>Pipelining the CPU</summary>
+
+
