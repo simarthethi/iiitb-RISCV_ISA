@@ -1162,8 +1162,24 @@ Added some more instructions to the existing ones and removed bogus codes and ad
 <details>
 <summary>Load and store data memory & Wrap up</summary>
 
+Similar to branch,load will also have 3 cycle delay. So, added a Data Memory 1 write/read 
+memory. Added test case to check the functionality of load/store.
 
+```bash
+	uncomment enable m4+dmem(@4)    // Args: (read/write stage)
+ 	connect interface signals using address bits[5:2] to perform load and store (when valid)
+	Additionally Incorporation of Jump feature (JAL and JALR instructions).
+```
 
+Below is the output Makerchip after including load/store instructions:
+
+![Screenshot from 2023-08-27 17-09-20](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/cc0b6389-583c-4c2a-9b7a-463e9d307bb4)
+
+- The Final Diagram is shown below
+
+![Screenshot from 2023-08-27 17-10-09](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/895f1120-f666-422d-aaa7-27eb3ec3bc9b)
+
+</detalis>
 
 
 
