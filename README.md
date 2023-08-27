@@ -876,8 +876,80 @@ along with the binary code. There are 6 instructions type in RISC-V :
 *Lab on instruction immediate code*
 ![Screenshot from 2023-08-27 04-20-45](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6c8d10ae-0370-487a-9906-1c400932d6ab)
 
+- Code or determining *immediate* for decode logic implementaion
+```bash
+		      $imm[31:0] = $is_i_instr ? {{21{$instr[31]}}, $instr[30:20]} :
+                      $is_s_instr ? {{21{$instr[31]}}, $instr[30:25], $instr[11:7]} :
+                      $is_b_instr ? {{20{$instr[31]}}, $instr[7], $instr[30:25], $instr[11:8], 1'b0} :
+                      $is_u_instr ? {$instr[31:12], 12'b0} :
+                      $is_j_instr ? {{12{$instr[31]}}, $instr[19:12], $instr[20], $instr[30:21], 1'b0} :
+                                    32'b0;
+```
+- Implementaion of the immediate instruction set
+![Screenshot from 2023-08-27 12-26-21](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/47d3164e-0b42-4973-89be-1df41a2b9d4c)
+- VIZ
+![Screenshot from 2023-08-27 12-27-15](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/db38cf29-4fea-4133-beee-d1a3ff66313d)
 
+*Lab on instruction decode*
+![Screenshot from 2023-08-27 12-28-27](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/c17f274f-74fa-45af-b4f0-842fc0bc8570)
 
+- Code fo nstruction code implmentaion
+```bash
+	 $rs2[4:0] = $instr[24:20];
+         $rs1[4:0] = $instr[19:15];
+         $rd[4:0]  = $instr[11:7];
+         $opcode[6:0] = $instr[6:0];
+         $func7[6:0] = $instr[31:25];
+         $func3[2:0] = $instr[14:12];
+```
 
-     
+- Output
+![Screenshot from 2023-08-27 12-30-28](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/e8294787-79e5-4ae9-8579-f2996c9c1dfc)
+- VIZ
+![Screenshot from 2023-08-27 12-33-05](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/ff34f021-6438-4b7e-b398-f91c2566cdb6)
 
+*Lab on Decoding Instruction Field Set*
+![Screenshot from 2023-08-27 12-42-12](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/bf1d779f-11a3-4f62-a076-ff38b434d9cb)
+
+-code for instruction based field set
+```bash
+	$rs2_valid = $is_r_instr || $is_s_instr || $is_b_instr;
+         ?$rs2_valid
+            $rs2[4:0] = $instr[24:20];
+            
+         $rs1_valid = $is_r_instr || $is_i_instr || $is_s_instr || $is_b_instr;
+         ?$rs1_valid
+            $rs1[4:0] = $instr[19:15];
+         
+         $funct3_valid = $is_r_instr || $is_i_instr || $is_s_instr || $is_b_instr;
+         ?$funct3_valid
+            $funct3[2:0] = $instr[14:12];
+            
+         $funct7_valid = $is_r_instr ;
+         ?$funct7_valid
+            $funct7[6:0] = $instr[31:25];
+            
+         $rd_valid = $is_r_instr || $is_i_instr || $is_u_instr || $is_j_instr;
+         ?$rd_valid
+            $rd[4:0] = $instr[11:7];
+```     
+- Output
+![Screenshot from 2023-08-27 12-45-20](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/e5dce8c8-5908-4ba8-8e2d-a6037abb57ed)
+- VIZ
+![Screenshot from 2023-08-27 12-46-28](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4944ec3f-59d2-4b9d-9f98-65e7fb7e86d5)
+
+*Lab on individual instruction decode*
+
+- code
+```bash
+	 $dec_bits [10:0] = {$funct7[5], $funct3, $opcode};
+         $is_beq = $dec_bits ==? 11'bx_000_1100011;
+         $is_bne = $dec_bits ==? 11'bx_001_1100011;
+         $is_blt = $dec_bits ==? 11'bx_100_1100011;
+         $is_bge = $dec_bits ==? 11'bx_101_1100011;
+         $is_bltu = $dec_bits ==? 11'bx_110_1100011;
+         $is_bgeu = $dec_bits ==? 11'bx_111_1100011;
+         $is_addi = $dec_bits ==? 11'bx_000_0010011;
+         $is_add = $dec_bits ==? 11'b0_000_0110011;
+```
+         
