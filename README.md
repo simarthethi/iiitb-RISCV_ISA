@@ -1,4 +1,4 @@
-# iiitb-RISCV_ISA
+![image](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/76cc6c7c-ede8-4565-83c0-425b895303f8)# iiitb-RISCV_ISA
 This github repositary contains all the progress made during RISC-V based MYTH
 
 [Day 1](#day-1)
@@ -1080,5 +1080,55 @@ $br_target_pc[31:0] = $pc + $imm;
 
 <details>
 <summary>Pipelining the CPU</summary>
+Pipelining of the CPU core is going to be implemented, streamlining the process of retiming and considerably reducing the occurrence of 
+functional errors. This technique enables faster computational tasks. As previously explained, establishing the pipeline is a 
+straightforward process of incorporating stages labelled as @1, @2, and so on. A visual representation of the pipelining setup is provided 
+below. In TL Verilog, it's important to note that there is no strict requirement to define the pipeline stages in a specific systematic 
+order, providing an extra layer of benefit.
+
+*LAB on Cycle valid signal*
+
+We are required to get implement the logic in the following block diagram:
+![Screenshot from 2023-08-27 15-41-10](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/8e74d03c-07c5-426a-953b-1791c78f5563)
+
+- the following code is used for implementaion
+```bash
+
+$valid = $reset ? 1'b0 : ($start) ? 1'b1 : (>>3$valid) ;
+         $start_int = $reset ? 1'b0 : 1'b1;
+         $start = $reset ? 1'b0 : ($start_int && !>>1$start_int);
+```
+The following output is obtained on MakerChip.
+![Screenshot from 2023-08-27 15-50-02](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/a3fd6b6e-d524-4a88-a8bf-cce7dbe0a56c)
+
+*LAB to take care of invalid cycles*
+
+![Screenshot from 2023-08-27 15-52-26](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/4fe735c8-ebcd-4f36-b6d2-cfdab206e5a2)
+
+- The code snippet required to implement is.
+```bash
+ $pc[31:0] = (>>1$reset) ? 32'b0 : (>>3$valid_taken_branch) ? (>>3$br_tgt_pc) :  (>>3$int_pc)  ;
+ $valid_taken_branch = $valid && $taken_br;
+```
+![Screenshot from 2023-08-27 15-59-51](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/6cd66100-a2cc-42e7-8e7f-b86f6de9ae3a)
+
+*LAB to distribute logic*
+Pipelining is done in this step. Code is distributed and output is obtained.
+![Screenshot from 2023-08-27 16-01-42](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/3ebabe6d-2cae-4ef5-9168-a815d1ca9f72)
+
+- below is the gievn output on makerchip
+
+![Screenshot from 2023-08-27 16-03-34](https://github.com/simarthethi/iiitb-RISCV_ISA/assets/140998783/59b51783-7778-4333-8080-42f37fc75197)
+
+
+
+
+
+
+
+
+
+
+
 
 
